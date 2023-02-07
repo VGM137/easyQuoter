@@ -1,0 +1,28 @@
+@font-face {
+  font-family: 'Finger Paint', cursive;
+  src: url('https://fonts.googleapis.com/css2?family=Finger+Paint&family=Rock+Salt&display=swap');
+}
+
+body{
+  margin: 0;
+  font-size: 2.2em;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: black;
+  box-sizing: border-box;
+}
+.principal{
+  width: 100vw;
+  margin: 20px auto;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: auto
+}
+.container__wrapper{
+  margin: 10px;
+}
+
+@media screen and (max-width: 768px) {
+  .principal{
+    grid-template-columns: 100%;
+  }
+}
