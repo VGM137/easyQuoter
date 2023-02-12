@@ -5,7 +5,7 @@ import Home from '../containers/Home';
 const App = () => (
   <BrowserRouter>
     <Routes>
-      <Route exact path = '/' component={Home}/>
+      <Route exact path = '/' element={<Home />} />
     </Routes>
   </BrowserRouter>
 )

@@ -2,27 +2,53 @@
   font-family: 'Finger Paint', cursive;
   src: url('https://fonts.googleapis.com/css2?family=Finger+Paint&family=Rock+Salt&display=swap');
 }
+*{
+  box-sizing: border-box;
+}
 
 body{
   margin: 0;
   font-size: 2.2em;
   font-family: Arial, Helvetica, sans-serif;
-  background-color: black;
+  background-color: rgb(255, 255, 255);
   box-sizing: border-box;
+  padding: 10px;
 }
-.principal{
-  width: 100vw;
-  margin: 20px auto;
-  display: grid;
-  grid-template-columns: 50% 50%;
-  grid-template-rows: auto
+input, select {
+  border: none;
+  background: none;
+  font-size: .45em;
 }
-.container__wrapper{
-  margin: 10px;
+input:focus, select:focus {
+  border: none;
+  background: none;
+  outline: none;
 }
 
-@media screen and (max-width: 768px) {
-  .principal{
-    grid-template-columns: 100%;
-  }
+.input-label{
+  font-size: .4em;
+  position: absolute;
+  top: -0.6em;
+  left: 8px;
+  background: white;
+  padding: 0 3px;
+  color: rgb(144 144 144 / 70%);
+}
+.select-label{
+  font-size: .4em;
+  position: absolute;
+  top: -0.6em;
+  left: 8px;
+  background: white;
+  padding: 0 3px;
+  color: rgb(144 144 144 / 70%);
+}
+
+.container-wrapper{
+  width: 90%;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  box-shadow: 0px 0px 7px 1px rgb(0 0 0 / 20%);
+  margin: 15px auto;
+  padding: 10px;
 }

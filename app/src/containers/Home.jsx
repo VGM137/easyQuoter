@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import VistaPrevia from '../components/VistaPrevia';
+import OrderSummary from '../components/OrderSummary';
+import SerigraphyOrder from '../components/SerigraphyOrder';
 import '../assets/styles/App.css'
 
 const Home = () => {
@@ -9,7 +10,8 @@ const Home = () => {
   return (
     <>
     <main id='principal' className='principal'> 
-      <VistaPrevia />
+      <OrderSummary />
+      <SerigraphyOrder />
     </main>
     </>
   )

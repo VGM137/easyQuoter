@@ -1,0 +1,25 @@
+.input-wrapper{
+  width: 95%;
+  margin: auto;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  border: rgb(144 144 144 / 70%) 1px solid;
+  border-radius: 10px;
+  height: 1.4em;
+  padding: 4px;
+  position: relative;
+}
+.input-wrapper:focus-within{
+  border: #707cbb 2px solid;
+}
+.input-wrapper input{
+  width: 100%;
+  margin: 15px auto auto;
+  padding: 0 0 0 10px;
+}
+.input-wrapper select{
+  width: 100%;
+  margin: auto;
+  padding: 0 0 0 10px;
+}
