@@ -54,6 +54,19 @@ const reducer = (state, action) => {
           serigraphyOrder: {...state.serigraphyOrder, clothes: [...state.serigraphyOrder.clothes, action.payload]}
         }
 
+    case 'CHANGE_INK':
+      return {
+          ...state,
+          serigraphyOrder: {...state.serigraphyOrder, productionInputs: state.serigraphyOrder.productionInputs.map((input, i) => i === action.payload[0] ? {...input, [action.payload[1]]: action.payload[2]}: input)}
+        }
+        
+    case 'UPDATE_INK':
+      console.log(action.payload)
+      return {
+          ...state,
+          serigraphyOrder: {...state.serigraphyOrder, productionInputs: action.payload}
+        }
+
     default :
     return state;
   }

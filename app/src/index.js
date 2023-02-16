@@ -13,7 +13,7 @@ const initialState = {
     clientName: '',
     description: '',
     totalClothes: '',
-    totalColors: '',
+    totalColors: 1,
     digitalWork: '',
     logistics: '',
     extraClothes: [
@@ -51,8 +51,9 @@ const initialState = {
       ink: '',
       quarterKgPrice: '',
       oneKgPrice: '',
+      input: '',
       quantityToBuy: '',
-      quantityToBuy: '',
+      totalPrice: '',
     }],
     prePosProdInputs: {
       frameWear: 5,

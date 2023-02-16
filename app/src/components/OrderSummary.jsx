@@ -10,7 +10,7 @@ const OrderSummary = () => {
   
   return (
     <section id="OrderSummary" className="order-summary__wrapper container-wrapper">
-      <div class='order-summary__input'>
+      <div className='order-summary__input'>
         <Input type={'text'} data={'admin'} placeholder={'Juanito'} label={'Socio'} />
         <Input type={'text'} data={'projectName'} placeholder={'Sudaderas de basquetbol'} label={'Proyecto'} />
         <Input type={'text'} data={'clientName'} placeholder={'Nombre ó Empresa'} label={'Cliente'} />
@@ -24,14 +24,6 @@ const OrderSummary = () => {
         <Input type={'select'} data={'clientCode'} placeholder={'4'} label={'CC'} />
         <Input type={'select'} data={'clothingCode'} placeholder={''} label={'CP'} />
         <Input type={'select'} data={'dueDateCode'} placeholder={''} label={'CE'} />
-      </div>
-      <div className='order-summary__extra-clothes'>
-        {
-          extraClothes.map((clothes, index) => {
-            return <ExtraClothes key={`clothes-group-${index}`} quantity={index} types={'text,number'} data={`extra-clothes__name,extra-clothes__value`} placeholders={'playera,54'} />
-          })
-        }
-        <AddButton component={'extraClothes'} text={'Añadir prenda extra'} />
       </div>
     </section>
 
