@@ -1,23 +1,51 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeOrderSummary } from '../actions';
+import { changeOrderSummary, updateInks } from '../actions';
 import '../assets/styles/components/Input.css';
 
 const Input = ({type, data, placeholder, label}) => {
   let codeValue = useSelector(state => state.orderSummary[data])
+  let productionInputs = useSelector(state => state.serigraphyOrder.productionInputs)
   const dispatch = useDispatch()
-
-  const handleInput = (e, level) => {
+  let mutableInputs = productionInputs
+  console.log(mutableInputs)
+  
+  const handleInput = async (e, level) => {
     console.log(e)
     console.log(level)
     let value = [level, e.target.value]
-    dispatch(changeOrderSummary(value))
+    if(level !== 'totalColors'){
+      dispatch(changeOrderSummary(value))
+    }
   }
   const handleChange = (e, level) => {
     console.log(e)
     console.log(level)
     let value = [level, e.target.value]
     dispatch(changeOrderSummary(value))
+  }
+
+  const handleBlur = (e, level) => {
+    let value = [level, e.target.value]
+    dispatch(changeOrderSummary(value))
+    
+    let inputsLength = productionInputs.length
+    let newField = {ink: '',quarterKgPrice: '',oneKgPrice: '',input: '',quantityToBuy: '',totalPrice: ''}
+  
+    if(inputsLength > e.target.value){
+      let difference = inputsLength - e.target.value
+      let pos1 = inputsLength-difference
+      mutableInputs.splice(pos1, difference)
+      console.log(mutableInputs)
+      dispatch(updateInks(mutableInputs))
+    }else{
+      let difference = e.target.value - inputsLength
+      for(let i = 0; i < difference; i++){
+        mutableInputs.push(newField)
+      }
+      console.log(mutableInputs)
+      dispatch(updateInks(mutableInputs))
+    }  
   }
   
   return (
@@ -35,7 +63,7 @@ const Input = ({type, data, placeholder, label}) => {
         </>
         : 
         <>
-          <input type={type} className={`${data}Input`} onInput={(e) => handleInput(e, data)} placeholder={placeholder} ></input>
+          <input type={type} className={`${data}Input`} onBlur={(e) => handleBlur(e, data)} onInput={(e) => handleInput(e, data)} placeholder={placeholder} ></input>
           <label className='input-label'>{label}</label>
         </>
       }

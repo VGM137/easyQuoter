@@ -18,3 +18,11 @@ export const addClothes = (payload) => ({
   type: "ADD_CLOTHES",
   payload 
  });
+export const changeInk = (payload) => ({
+  type: "CHANGE_INK",
+  payload 
+ });
+export const updateInks = (payload) => ({
+  type: "UPDATE_INK",
+  payload 
+ });

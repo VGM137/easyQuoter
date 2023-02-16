@@ -24,9 +24,15 @@ const ExtraClothes = ({quantity, types, data, placeholders}) => {
   
   return (
     <>
+    {quantity === 0 &&
+      <div className='extra-clothes__titles'>
+        <h3 className='extra-clothes__name'>Prenda</h3>
+        <h3 className='extra-clothes__price'>Precio</h3>
+      </div>
+    }
     <div id="" className="extra-clothes__wrapper">
       {inputTypes.map((type, index) => {
-        return <div id="" className="extra-clothes__input-wrapper"><input 
+        return <div key={`extra-clothes-wrapper-${quantity}-${index}`} id="" className="extra-clothes__input-wrapper"><input 
           key={`extra-clothes-${quantity}-${index}`}
           data-number={quantity} 
           type={type} 
