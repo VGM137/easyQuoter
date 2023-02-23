@@ -1,8 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import Input from './Input';
-import ExtraClothes from './ExtraClothes';
-import AddButton from './AddButton';
+
 import '../assets/styles/components/OrderSummary.css';
 
 const OrderSummary = () => {

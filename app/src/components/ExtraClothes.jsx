@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeGroupedInput } from '../actions';
+/* import { changeGroupedInput } from '../actions'; */
 import '../assets/styles/components/ExtraClothes.css';
 
 const ExtraClothes = ({quantity, types, data, placeholders}) => {
@@ -13,6 +13,8 @@ const ExtraClothes = ({quantity, types, data, placeholders}) => {
   let inputPlaceholders = placeholders.split(',')
 
   const handleInput = (e, index) => {
+    let regex = /^\d+$/
+    let value = e.target.value.match(regex) ? parseInt(e.target.value) : e.target.value
     if(index == 0){
       let value = [quantity, {groupName: e.target.value, groupValue: clothPrice}]
       dispatch(changeGroupedInput(value))

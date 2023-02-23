@@ -16,7 +16,7 @@ const reducer = (state, action) => {
         orderSummary: orderSummary
       }
 
-    case 'CHANGE_GROUP':
+/*     case 'CHANGE_GROUP':
       let index = 0
       let newExtraClothes = state.orderSummary.extraClothes.map(cloth => { 
         if(index == action.payload[0]) {
@@ -34,13 +34,13 @@ const reducer = (state, action) => {
       return {
         ...state,
         orderSummary: {...state.orderSummary, extraClothes: newExtraClothes}
-      }
+      } */
     
-    case 'ADD_EXTRA_CLOTHES':
+/*     case 'ADD_EXTRA_CLOTHES':
       return {
         ...state,
         orderSummary: {...state.orderSummary, extraClothes: [...state.orderSummary.extraClothes, action.payload]}
-      }
+      } */
     
     case 'ORDER_CLOTHES':
     return {
@@ -61,10 +61,27 @@ const reducer = (state, action) => {
         }
         
     case 'UPDATE_INK':
-      console.log(action.payload)
       return {
           ...state,
           serigraphyOrder: {...state.serigraphyOrder, productionInputs: action.payload}
+        }
+
+    case 'UPDATE_CLOTHES_DEPENDENCIE':
+      return {
+          ...state,
+          serigraphyOrder: {...state.serigraphyOrder, clothes: state.serigraphyOrder.clothes.map((clothes, i) => i === action.payload[0] ? {...clothes, [action.payload[1]]: action.payload[2]}: clothes)}
+        }
+        
+    case 'UPDATE_INK_DEPENDENCIE':
+      return {
+          ...state,
+          serigraphyOrder: {...state.serigraphyOrder, productionInputs: state.serigraphyOrder.productionInputs.map((input, i) => i === action.payload[0] ? {...input, [action.payload[1]]: action.payload[2]}: input)}
+        }
+
+    case 'UPDATE_ECTOTAL':
+      return {
+          ...state,
+          orderSummary: {...state.orderSummary, extraClothesTotal: action.payload}
         }
 
     default :

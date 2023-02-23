@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { updateInks } from '../actions';
+import { useSelector } from 'react-redux';
 import Ink from './Ink';
-import '../assets/styles/components/SerigraphyOrder.css';
+import '../assets/styles/components/OrderProductionInputs.css';
 
 const OrderProductionInputs = () => {
 
@@ -14,6 +13,7 @@ const OrderProductionInputs = () => {
   useEffect(() => {
     console.log('effect')
     let renderArray = productionInputs.map((input, index) => {
+      console.log(index)
       return <Ink 
               key={`ink-input-${index}`} 
               quantity={index} 
@@ -27,7 +27,7 @@ const OrderProductionInputs = () => {
   }, [colors])
   
   return (
-    <section id="OrderProductionInputs" className="production-inputs__wrapper container-wrapper">
+    <section id="OrderProductionInputs" className="production-inputs__container container-wrapper">
       {inputsArray}
     </section>
   )

@@ -14,7 +14,7 @@ const Home = () => {
     <main id='principal' className='principal'> 
       <OrderSummary />
       <SerigraphyOrder />
-      <OrderExtraClothes />
+      {/* <OrderExtraClothes /> */}
       <OrderProductionInputs />
     </main>
     </>

@@ -1,5 +1,6 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateExtraClothesTotal } from '../actions';
 import Input from './Input';
 import ExtraClothes from './ExtraClothes';
 import AddButton from './AddButton';
@@ -7,6 +8,16 @@ import '../assets/styles/components/OrderSummary.css';
 
 const OrderExtraClothes = () => {
   let extraClothes = useSelector(state => state.orderSummary.extraClothes)
+
+  let dispatch = useDispatch()
+
+  
+  useEffect(() => {
+    let total = 0
+    extraClothes.map(garment => total += garment.groupValue)
+
+    dispatch(updateExtraClothesTotal(total))
+  }, [extraClothes])
   
   return (
     <section id="OrderExtraClothes" className="order-extra__clothes-wrapper container-wrapper">
