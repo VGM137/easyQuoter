@@ -8,12 +8,8 @@ const AddButton = ({component, text}) => {
   let dispatch = useDispatch()
 
   const handleClick = () => {
-/*     if(component === 'extraClothes'){
-      let data = {groupName:'', groupValue:0}
-      dispatch(addExtraClothes(data)) */
-    /* }else */ 
     if(component === 'newClothes'){
-      let data = {type: '', cut: '', color: '', size: '', material: '', brand: '', quantity: '', unitPrice: ''}
+      let data = {type: '',cut: '',color: '',size: '',material: '',brand: '',quantity: 0,extra: 0,unitPrice: 0,totalPrice: 0,digitalWork: 0,logistics: 0,testInputs: 0,inkInput: 0,prePostProdInputs: 0,prodLabour: 0,prePosProdLabour: 0,costWOGarmant: 0,unitCostWOGarmant: 0,prodTotalCost: 0,prodUnitCost: 0,profit: 0,price: 0,taxes: 0}
       dispatch(addClothes(data))
     }
   }

@@ -7,12 +7,15 @@ import reducer from './reducers';
 import App from './routes/App.js';
 
 const initialState = {
+  showSerigraphyCard: true,
+  showInksCard: true,
+  showConfigurations: false,
   orderSummary: {
     admin: '',
     projectName: '',
     clientName: '',
     description: '',
-    totalClothes: '',
+    totalClothes: 0,
     totalColors: 1,
     digitalWork: 0,
     logistics: 0,

@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeOrderSummary, changeOrderClothes, updateClothesDependencie } from '../actions';
+import { changeOrderSummary, changeOrderClothes, updateClothesDependencie, deleteClothes } from '../actions';
 import '../assets/styles/components/Clothes.css';
 
 const Clothes = ({quantity, types, data, placeholders, fieldNames, labels}) => {
@@ -54,21 +54,25 @@ const Clothes = ({quantity, types, data, placeholders, fieldNames, labels}) => {
       dispatch(changeOrderSummary(summaryData))
     }
   }
+  const handleClick = (e, quantity) => {
+    dispatch(deleteClothes(quantity))
+  }
 
   useEffect(() => {
-    let garmentTotalCost = (unitQuantity+extraGarment)*unitPrice
-    let digitalWorkCost = ((digitalWorkPerHr)/totalClothes)*unitQuantity
-    let logisticsCost = (logistics/totalClothes)*unitQuantity
-    let testInputsCost = (extraGarment/totalClothes)*unitQuantity
-    let inkInput = (inksTotal/totalClothes)*unitQuantity
-    let productionInputTotal = ((productionInputCost*totalColors)/totalClothes)*unitQuantity
-    let productionLabourTotal = ((productionLabourCost*totalColors*(totalClothes+extraGarment))/totalClothes)*unitQuantity
-    let prePosProductionLabourTotal = (( (((minimumWage/8)*prePosProductionLabourTime)/60) * totalColors )/totalClothes)*unitQuantity
-    let costWOGarmantSubtotal = digitalWorkCost+logisticsCost+testInputsCost+inkInput+productionInputTotal+productionLabourTotal+prePosProductionLabourTotal
-    let unitCostWOGarmantSubtotal = costWOGarmantSubtotal/unitQuantity
-    let totalCost = garmentTotalCost+costWOGarmantSubtotal
-    let unitTotalCost = totalCost/unitQuantity
+    let garmentTotalCost = (unitQuantity+extraGarment)*unitPrice || 0
+    let digitalWorkCost = ((digitalWorkPerHr)/totalClothes)*unitQuantity || 0
+    let logisticsCost = (logistics/totalClothes)*unitQuantity || 0
+    let testInputsCost = (extraGarment/totalClothes)*unitQuantity || 0
+    let inkInput = (inksTotal/totalClothes)*unitQuantity || 0
+    let productionInputTotal = ((productionInputCost*totalColors)/totalClothes)*unitQuantity || 0
+    let productionLabourTotal = ((productionLabourCost*totalColors*(totalClothes+extraGarment))/totalClothes)*unitQuantity || 0
+    let prePosProductionLabourTotal = (( (((minimumWage/8)*prePosProductionLabourTime)/60) * totalColors )/totalClothes)*unitQuantity || 0
+    let costWOGarmantSubtotal = digitalWorkCost+logisticsCost+testInputsCost+inkInput+productionInputTotal+productionLabourTotal+prePosProductionLabourTotal || 0
+    let unitCostWOGarmantSubtotal = costWOGarmantSubtotal/unitQuantity || 0
+    let totalCost = garmentTotalCost+costWOGarmantSubtotal || 0
+    let unitTotalCost = totalCost/unitQuantity || 0
 
+    console.log(digitalWorkCost)
     dispatch(updateClothesDependencie([quantity, 'totalPrice', parseFloat(garmentTotalCost.toFixed(2))]))
     dispatch(updateClothesDependencie([quantity, 'digitalWork', parseFloat(digitalWorkCost.toFixed(2))]))
     dispatch(updateClothesDependencie([quantity, 'logistics', parseFloat(logisticsCost.toFixed(2))]))
@@ -98,7 +102,12 @@ const Clothes = ({quantity, types, data, placeholders, fieldNames, labels}) => {
   return (
     <>
     <div id="" className="serigraphy-clothes__wrapper">
-      <h3 className='serigraphy-clothes__title'>{`Prenda ${quantity+1}`}</h3>
+      <div className='serigraphy-clothes__header' >
+        <h3 className='serigraphy-clothes__title'>{`Prenda ${quantity+1}`}</h3>
+        {quantity !== 0 &&
+          <button className='serigraphy-clothes__delete' onClick={(e) => handleClick(e, quantity)}>Borrar</button>
+        }
+      </div>
       {inputTypes.map((type, index) => {
         return <div key={`clothes-wrapper-${quantity}-${index}`} className='clothes-wrapper'> <input 
           key={`clothes-${quantity}-${index}`}

@@ -6,7 +6,7 @@
   padding: 1.4em 0 10px;
   position: relative;
 }
-.serigraphy-clothes__wrapper:first-child{
+.serigraphy-clothes__wrapper:nth-child(-n+2){
   border-top: none!important;
 }
 .serigraphy-clothes__wrapper div:nth-child(even){
@@ -15,14 +15,26 @@
 .serigraphy-clothes__wrapper div:nth-child(odd){
   margin: 10px 0 0 auto;
 }
-.serigraphy-clothes__title{
+.serigraphy-clothes__header{
+  display: flex;
   position: absolute;
-  margin: 0 10px;
   font-size: .6em;
   top: 0.9em;
   left: 0;
+  margin: 0!important;
+}
+.serigraphy-clothes__title{
+  margin: 0 10px;
   font-weight: 300;
   color: #75758b;
+}
+.serigraphy-clothes__delete{
+  border: #7986cb 1px solid;
+  border-radius: 100px;
+  background-color: transparent;
+  color: #7986cb;
+  outline: none;
+  padding: 1px 10px;
 }
 .clothes-wrapper{
   width: 95%;
