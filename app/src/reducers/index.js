@@ -1,6 +1,12 @@
 const reducer = (state, action) => {
 
   switch(action.type){
+    
+    case 'CHANGE_SERIGRAPHY_CARD':
+      return {
+        ...state,
+        showSerigraphyCard: action.payload
+      }
 
     case 'ORDER_SUMMARY':
       let orderSummary = {}
@@ -52,6 +58,15 @@ const reducer = (state, action) => {
       return {
           ...state,
           serigraphyOrder: {...state.serigraphyOrder, clothes: [...state.serigraphyOrder.clothes, action.payload]}
+        }
+
+    case 'DELETE_CLOTHES':
+      let newArray = state.serigraphyOrder.clothes.splice(action.payload, 1)
+      console.log(newArray)
+
+      return {
+          ...state,
+          serigraphyOrder: {...state.serigraphyOrder, clothes: newArray}
         }
 
     case 'CHANGE_INK':

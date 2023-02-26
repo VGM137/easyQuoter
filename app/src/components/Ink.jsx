@@ -7,6 +7,7 @@ const Ink = ({quantity, types, data, placeholders, fieldNames, labels}) => {
   const dispatch = useDispatch()
 
   let totalClothes = useSelector(state => state.orderSummary.totalClothes)
+  let extraClothesTotal = useSelector(state => state.orderSummary.extraClothesTotal)
   let oneKgPrice = useSelector(state => state.serigraphyOrder?.productionInputs[quantity]?.oneKgPrice)
   let realInput = useSelector(state => state.serigraphyOrder?.productionInputs[quantity]?.input)
   let quantityToBuy = useSelector(state => state.serigraphyOrder?.productionInputs[quantity]?.quantityToBuy)
@@ -27,14 +28,14 @@ const Ink = ({quantity, types, data, placeholders, fieldNames, labels}) => {
   }
 
   useEffect(() => {
-    let realInput = totalClothes*0.02
+    let realInput = (totalClothes+extraClothesTotal)*0.02
     let roundValue = roundToNearestQuarter(realInput)
     let subtotal = oneKgPrice*quantityToBuy
     
     dispatch(updateInkDependencie([quantity, 'input', realInput]))
     dispatch(updateInkDependencie([quantity, 'quantityToBuy', roundValue]))
     dispatch(updateInkDependencie([quantity, 'totalPrice', subtotal]))
-  }, [totalClothes, oneKgPrice, quantityToBuy])
+  }, [extraClothesTotal, oneKgPrice, quantityToBuy])
 
   const roundToNearestQuarter = (number) => {
     var quarter = 0.25;

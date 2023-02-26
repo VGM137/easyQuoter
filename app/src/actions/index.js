@@ -1,11 +1,19 @@
+export const changeSerygraphyOrderCard = (payload) => ({
+  type: "CHANGE_SERIGRAPHY_CARD",
+  payload 
+ });
+export const changeInkOrderCard = (payload) => ({
+  type: "CHANGE_INK_CARD",
+  payload 
+ });
+export const showConfigurations = (payload) => ({
+  type: "SHOW_CONFIG",
+  payload 
+ });
 export const changeOrderSummary = (payload) => ({
   type: "ORDER_SUMMARY",
   payload 
  });
-/* export const changeGroupedInput = (payload) => ({
-  type: "CHANGE_GROUP",
-  payload 
- }); */
 export const changeOrderClothes = (payload) => ({
   type: "ORDER_CLOTHES",
   payload 
@@ -16,6 +24,10 @@ export const changeOrderClothes = (payload) => ({
  }); */
 export const addClothes = (payload) => ({
   type: "ADD_CLOTHES",
+  payload 
+ });
+export const deleteClothes = (payload) => ({
+  type: "DELETE_CLOTHES",
   payload 
  });
 export const changeInk = (payload) => ({

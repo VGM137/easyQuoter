@@ -7,16 +7,19 @@ import reducer from './reducers';
 import App from './routes/App.js';
 
 const initialState = {
+  showSerigraphyCard: true,
+  showInksCard: true,
+  showConfigurations: false,
   orderSummary: {
     admin: '',
     projectName: '',
     clientName: '',
     description: '',
-    totalClothes: '',
+    totalClothes: 0,
     totalColors: 1,
     digitalWork: 0,
     logistics: 0,
-    extraClothesTotal: '',//Crear suma para el estado
+    extraClothesTotal: 0,//Crear suma para el estado
     clientCode: '',
     clothingCode: '',
     dueDateCode: ''
@@ -41,6 +44,7 @@ const initialState = {
       prodLabour: 0,
       prePosProdLabour: 0,
       costWOGarmant: 0,
+      unitCostWOGarmant: 0,
       prodTotalCost: 0,
       prodUnitCost: 0,
       profit: 0,
