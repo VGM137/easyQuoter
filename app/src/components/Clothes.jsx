@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeOrderSummary, changeOrderClothes, updateClothesDependencie, deleteClothes } from '../actions';
+import { changeOrderSummary, changeOrderClothes, updateClothesDependencie } from '../actions';
+import SerigraphyClothesHeader from './SerigraphyClothesHeader';
 import '../assets/styles/components/Clothes.css';
 
 const Clothes = ({quantity, types, data, placeholders, fieldNames, labels}) => {
@@ -12,14 +13,14 @@ const Clothes = ({quantity, types, data, placeholders, fieldNames, labels}) => {
   const digitalWorkPerHr = useSelector(state => state.orderSummary.digitalWork)
   const extraClothesTotal = useSelector(state => state.orderSummary.extraClothesTotal)
 
-  const clothesArray = useSelector(state => state.serigraphyOrder?.clothes)
   const unitQuantity = useSelector(state => state.serigraphyOrder?.clothes[quantity]?.quantity)
   const unitPrice = useSelector(state => state.serigraphyOrder?.clothes[quantity]?.unitPrice)
   const extraGarment = useSelector(state => state.serigraphyOrder?.clothes[quantity]?.extra)
   const inkTotalPrice = useSelector(state => state.serigraphyOrder?.clothes[quantity]?.totalPrice)
   const prodInputs = useSelector(state => state.serigraphyOrder.productionInputs)
   const prePosProdInputs = useSelector(state => state.serigraphyOrder.prePosProdInputs)
-  const prodLabour = useSelector(state => state.serigraphyOrder.prodLabour)
+  const prodLabourCosts = useSelector(state => state.serigraphyOrder.prodLabourCosts)
+  const prodLabourTime = useSelector(state => state.serigraphyOrder.prodLabourTime)
   const prePosProdLabour = useSelector(state => state.serigraphyOrder.prePosProdLabour)
   const minimumWage = prePosProdLabour.minimumWage
 
@@ -30,7 +31,8 @@ const Clothes = ({quantity, types, data, placeholders, fieldNames, labels}) => {
   Object.values(prePosProdInputs).map(input => productionInputCost += input)
   
   let productionLabourCost = 0
-  Object.values(prodLabour).map(cost => productionLabourCost += cost)
+  let labourTime = Object.values(prodLabourTime)
+  Object.values(prodLabourCosts).map((cost, i) => productionLabourCost += (cost*parseFloat(labourTime[i])))
   
   let prePosProductionLabourTime = 0
   Object.values(prePosProdLabour).map((time, index) => index === 0 ? '' : prePosProductionLabourTime += time)
@@ -54,9 +56,6 @@ const Clothes = ({quantity, types, data, placeholders, fieldNames, labels}) => {
       dispatch(changeOrderSummary(summaryData))
     }
   }
-  const handleClick = (e, quantity) => {
-    dispatch(deleteClothes(quantity))
-  }
 
   useEffect(() => {
     let garmentTotalCost = (unitQuantity+extraGarment)*unitPrice || 0
@@ -65,7 +64,7 @@ const Clothes = ({quantity, types, data, placeholders, fieldNames, labels}) => {
     let testInputsCost = (extraGarment/totalClothes)*unitQuantity || 0
     let inkInput = (inksTotal/totalClothes)*unitQuantity || 0
     let productionInputTotal = ((productionInputCost*totalColors)/totalClothes)*unitQuantity || 0
-    let productionLabourTotal = ((productionLabourCost*totalColors*(totalClothes+extraGarment))/totalClothes)*unitQuantity || 0
+    let productionLabourTotal = ((productionLabourCost*totalColors*(totalClothes+extraClothesTotal))/totalClothes)*unitQuantity || 0
     let prePosProductionLabourTotal = (( (((minimumWage/8)*prePosProductionLabourTime)/60) * totalColors )/totalClothes)*unitQuantity || 0
     let costWOGarmantSubtotal = digitalWorkCost+logisticsCost+testInputsCost+inkInput+productionInputTotal+productionLabourTotal+prePosProductionLabourTotal || 0
     let unitCostWOGarmantSubtotal = costWOGarmantSubtotal/unitQuantity || 0
@@ -95,19 +94,14 @@ const Clothes = ({quantity, types, data, placeholders, fieldNames, labels}) => {
       inkTotalPrice,
       prodInputs,
       prePosProdInputs,
-      prodLabour,
+      prodLabourCosts,
       prePosProdLabour
      ])
   
   return (
     <>
     <div id="" className="serigraphy-clothes__wrapper">
-      <div className='serigraphy-clothes__header' >
-        <h3 className='serigraphy-clothes__title'>{`Prenda ${quantity+1}`}</h3>
-        {quantity !== 0 &&
-          <button className='serigraphy-clothes__delete' onClick={(e) => handleClick(e, quantity)}>Borrar</button>
-        }
-      </div>
+      <SerigraphyClothesHeader quantity={quantity} />
       {inputTypes.map((type, index) => {
         return <div key={`clothes-wrapper-${quantity}-${index}`} className='clothes-wrapper'> <input 
           key={`clothes-${quantity}-${index}`}

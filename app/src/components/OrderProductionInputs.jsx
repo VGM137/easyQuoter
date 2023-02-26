@@ -27,9 +27,13 @@ const OrderProductionInputs = () => {
   }, [colors])
   
   return (
-    <section id="OrderProductionInputs" className="production-inputs__container container-wrapper">
-      {inputsArray}
-    </section>
+    <>
+      {colors > 0 &&
+        <section id="OrderProductionInputs" className="production-inputs__container container-wrapper">
+          {inputsArray}
+        </section>
+      }
+    </>
   )
 };
 

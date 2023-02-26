@@ -16,7 +16,7 @@ const initialState = {
     clientName: '',
     description: '',
     totalClothes: 0,
-    totalColors: 1,
+    totalColors: 0,
     digitalWork: 0,
     logistics: 0,
     extraClothesTotal: 0,//Crear suma para el estado
@@ -75,7 +75,13 @@ const initialState = {
       cleaning: 20,
       other: 10,
     },
-    prodLabour: {
+    prodLabourCosts: {
+      printing: 1,
+      preDrying: 1,
+      ironing: 1,
+      package: 1
+    },
+    prodLabourTime: {
       printing: 1,
       preDrying: 1,
       ironing: 1,

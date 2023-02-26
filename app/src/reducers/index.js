@@ -2,6 +2,36 @@ const reducer = (state, action) => {
 
   switch(action.type){
     
+    case 'CONFIG_INPUT':
+      return {
+        ...state,
+        serigraphyOrder: {...state.serigraphyOrder, prePosProdInputs: {...state.serigraphyOrder.prePosProdInputs, [action.payload[0]]: action.payload[1]}}
+      }
+    
+    case 'CONFIG_LABOUR':
+      return {
+        ...state,
+        serigraphyOrder: {...state.serigraphyOrder, prePosProdLabour: {...state.serigraphyOrder.prePosProdInputs, [action.payload[0]]: action.payload[1]}}
+      }
+    
+    case 'CONFIG_LABOUR_COST':
+      return {
+        ...state,
+        serigraphyOrder: {...state.serigraphyOrder, prodLabourCosts: {...state.serigraphyOrder.prePosProdInputs, [action.payload[0]]: action.payload[1]}}
+      }
+    
+    case 'CONFIG_LABOUR_TIME':
+      return {
+        ...state,
+        serigraphyOrder: {...state.serigraphyOrder, prodLabourTime: {...state.serigraphyOrder.prePosProdInputs, [action.payload[0]]: action.payload[1]}}
+      }
+    
+    case 'SHOW_CONFIG':
+      return {
+        ...state,
+        showConfigurations: action.payload
+      }
+    
     case 'CHANGE_SERIGRAPHY_CARD':
       return {
         ...state,
@@ -61,12 +91,11 @@ const reducer = (state, action) => {
         }
 
     case 'DELETE_CLOTHES':
-      let newArray = state.serigraphyOrder.clothes.splice(action.payload, 1)
-      console.log(newArray)
+
 
       return {
           ...state,
-          serigraphyOrder: {...state.serigraphyOrder, clothes: newArray}
+          serigraphyOrder: {...state.serigraphyOrder, clothes: [...state.serigraphyOrder.clothes.filter((clothes, i) => i !== action.payload)]}
         }
 
     case 'CHANGE_INK':

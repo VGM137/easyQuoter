@@ -1,13 +1,30 @@
+export const showConfigurations = (payload) => ({
+  type: "SHOW_CONFIG",
+  payload 
+ });
+export const configProdInputs = (payload) => ({
+  type: "CONFIG_INPUT",
+  payload 
+ });
+export const configProdLabour = (payload) => ({
+  type: "CONFIG_LABOUR",
+  payload 
+ });
+export const configLabourCost = (payload) => ({
+  type: "CONFIG_LABOUR_COST",
+  payload 
+ });
+export const configLabourTime = (payload) => ({
+  type: "CONFIG_LABOUR_TIME",
+  payload 
+ });
 export const changeSerygraphyOrderCard = (payload) => ({
   type: "CHANGE_SERIGRAPHY_CARD",
   payload 
  });
+
 export const changeInkOrderCard = (payload) => ({
   type: "CHANGE_INK_CARD",
-  payload 
- });
-export const showConfigurations = (payload) => ({
-  type: "SHOW_CONFIG",
   payload 
  });
 export const changeOrderSummary = (payload) => ({

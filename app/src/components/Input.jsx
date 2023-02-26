@@ -16,9 +16,7 @@ const Input = ({type, data, placeholder, label}) => {
     let value = [level, targetValue]
     if(level !== 'totalColors'){
       dispatch(changeOrderSummary(value))
-
     }
-
   }
   const handleChange = (e, level) => {
     let regex = /^\d+$/
@@ -75,7 +73,7 @@ const Input = ({type, data, placeholder, label}) => {
         : 
         <>
           <input 
-            min={1} 
+            min={0} 
             type={type} 
             className={`${data}Input`} 
             onBlur={(e) => handleBlur(e, data)} 

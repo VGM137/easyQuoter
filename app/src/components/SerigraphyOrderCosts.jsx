@@ -1,19 +1,20 @@
 import React, {useState, useEffect} from 'react';
 import { useSelector } from 'react-redux';
 import ClothesOutput from './ClothesOutput';
+import SerigraphyClothesHeader from './SerigraphyClothesHeader';
 import '../assets/styles/components/SerigraphyOrder.css';
 
 const SerigraphyOrderCosts = () => {
-  let clothes = useSelector(state => state.serigraphyOrder.clothes)
+  let clothesArray = useSelector(state => state.serigraphyOrder.clothes)
 
-  const [costsArray,setClothesCostsArray] = useState([])
+  const [clothesOutputs,setClothesCostsArray] = useState([])
 
   useEffect(() => {
     console.log('effect')
-    let renderArray = clothes.map((clothes, index) => {
+    let renderArray = clothesArray.map((clothes, index) => {
       console.log(index)
       return  <div key={`serigraphy-order-cost-${index}`} id="" className="serigraphy-clothes__cost-wrapper">
-                <h3 className='serigraphy-clothes__title'>{`Prenda ${index+1}`}</h3>
+                <SerigraphyClothesHeader quantity={index}/>
                 <ClothesOutput index={index} component={clothes.totalPrice} label={'Precio'} />
                 <ClothesOutput index={index} component={clothes.digitalWork} label={'Diseño'} />
                 <ClothesOutput index={index} component={clothes.logistics} label={'Logística'} />
@@ -32,11 +33,11 @@ const SerigraphyOrderCosts = () => {
               </div>
     });
     setClothesCostsArray(renderArray)
-  }, [clothes])
+  }, [clothesArray])
   
   return (
     <>
-      {costsArray}
+      {clothesOutputs}
     </>
   )
 };
