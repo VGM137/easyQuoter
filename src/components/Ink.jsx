@@ -13,11 +13,11 @@ const Ink = ({quantity, types, data, placeholders, fieldNames, labels}) => {
   let quantityToBuy = useSelector(state => state.serigraphyOrder?.productionInputs[quantity]?.quantityToBuy)
   let inputPrice = useSelector(state => state.serigraphyOrder?.productionInputs[quantity]?.totalPrice)
   
-  let inputTypes = types.split(',')
-  let inputData = data.split(',')
-  let inputPlaceholders = placeholders.split(',')
-  let inputFields = fieldNames.split(',')
-  let inputLabels = labels.split(',')
+  let inputTypes = types
+  let inputData = data
+  let inputPlaceholders = placeholders
+  let inputFields = fieldNames
+  let inputLabels = labels
 
   const handleInput = (e, fieldName, index) => {
     let regex = /^\d+$/
@@ -32,9 +32,9 @@ const Ink = ({quantity, types, data, placeholders, fieldNames, labels}) => {
     let roundValue = roundToNearestQuarter(realInput)
     let subtotal = oneKgPrice*quantityToBuy
     
-    dispatch(updateInkDependencie([quantity, 'input', realInput]))
-    dispatch(updateInkDependencie([quantity, 'quantityToBuy', roundValue]))
-    dispatch(updateInkDependencie([quantity, 'totalPrice', subtotal]))
+    dispatch(updateInkDependencie([quantity, 'input', parseFloat(realInput).toFixed(2)]))
+    dispatch(updateInkDependencie([quantity, 'quantityToBuy', parseFloat(roundValue).toFixed(2)]))
+    dispatch(updateInkDependencie([quantity, 'totalPrice', parseFloat(subtotal).toFixed(2)]))
   }, [extraClothesTotal, oneKgPrice, quantityToBuy])
 
   const roundToNearestQuarter = (number) => {
@@ -45,40 +45,38 @@ const Ink = ({quantity, types, data, placeholders, fieldNames, labels}) => {
   return (
     <>
     <div id="" className="production__inputs-wrapper">
-      <h3 className='production-input__title'>{`Tinta ${quantity+1}`}</h3>
-      {inputTypes.map((type, index) => {
-        return <div key={`production__inputs-wrapper-${quantity}-${index}`} id="" className="input-wrapper">
-          {inputFields[index] === 'input' || inputFields[index] === 'quantityToBuy' || inputFields[index] === 'totalPrice' 
+
+      <div key={`production__inputs-wrapper-${quantity}`} id="" className="input-wrapper">
+          {inputFields === 'input' || inputFields === 'quantityToBuy' || inputFields === 'totalPrice' 
             ?
             <p 
-              key={`production__inputs-${quantity}-${index}`}
+              key={`production__inputs-${quantity}`}
               data-number={quantity} 
-              data-name={inputFields[index]}
-              type={type} 
-              className={`${inputData[index]}-production__inputs`} 
-              placeholder={inputPlaceholders[index]} 
-              onInput={(e) => handleInput(e, inputFields[index], index)}
+              data-name={inputFields}
+              type={types} 
+              className={`${inputData}-production__inputs`} 
+              placeholder={inputPlaceholders} 
+              onInput={(e) => handleInput(e, inputFields)}
             >
-              {inputFields[index] === 'input' && realInput}
-              {inputFields[index] === 'quantityToBuy' && quantityToBuy}
-              {inputFields[index] === 'totalPrice' && inputPrice}
+              {inputFields === 'input' && realInput}
+              {inputFields === 'quantityToBuy' && quantityToBuy}
+              {inputFields === 'totalPrice' && inputPrice}
             </p>
             : 
             <input 
-              key={`production__inputs-${quantity}-${index}`}
+              key={`production__inputs-${quantity}`}
               data-number={quantity} 
-              data-name={inputFields[index]}
-              type={type} 
-              className={`${inputData[index]}-production__inputs`} 
-              placeholder={inputPlaceholders[index]} 
-              onInput={(e) => handleInput(e, inputFields[index], index)}
+              data-name={inputFields}
+              type={types} 
+              className={`${inputData}-production__inputs`} 
+              placeholder={inputPlaceholders} 
+              onInput={(e) => handleInput(e, inputFields)}
             >
-            
             </input>
           }
-        <label key={`input-label-${quantity}-${index}`} className='input-label'>{inputLabels[index]}</label>
+        <label key={`input-label-${quantity}`} className='input-label'>{inputLabels}</label>
         </div>
-      })}
+      
     </div>
     </>
   )
