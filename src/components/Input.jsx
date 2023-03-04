@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeOrderSummary, updateInks } from '../actions';
 import '../assets/styles/components/Input.css';
@@ -6,6 +6,9 @@ import '../assets/styles/components/Input.css';
 const Input = ({type, data, placeholder, label}) => {
   let codeValue = useSelector(state => state.orderSummary[data])
   let productionInputs = useSelector(state => state.serigraphyOrder.productionInputs)
+  
+  const [value, setValue] = useState(codeValue);
+  
   const dispatch = useDispatch()
 
   let mutableInputs = productionInputs
@@ -14,6 +17,7 @@ const Input = ({type, data, placeholder, label}) => {
     let regex = /^\d+$/
     let targetValue = e.target.value.match(regex) ? parseInt(e.target.value) : e.target.value
     let value = [level, targetValue]
+    setValue(targetValue)
     if(level !== 'totalColors'){
       dispatch(changeOrderSummary(value))
     }
@@ -22,6 +26,7 @@ const Input = ({type, data, placeholder, label}) => {
     let regex = /^\d+$/
     let targetValue = e.target.value.match(regex) ? parseInt(e.target.value) : e.target.value
     let value = [level, targetValue]
+    setValue(targetValue)
     dispatch(changeOrderSummary(value))
   }
 
@@ -57,7 +62,7 @@ const Input = ({type, data, placeholder, label}) => {
         ? 
         <>
           <select 
-            value={codeValue} 
+            value={value} 
             type={type} 
             className={`${data}Input`} 
             onChange={(e) => handleChange(e, data)} 
@@ -78,7 +83,8 @@ const Input = ({type, data, placeholder, label}) => {
             className={`${data}Input`} 
             onBlur={(e) => handleBlur(e, data)} 
             onInput={(e) => handleInput(e, data)} 
-            placeholder={placeholder} >
+            placeholder={placeholder} 
+            value={value}>
           </input>
           <label className='input-label'>{label}</label>
         </>

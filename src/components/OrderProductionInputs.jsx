@@ -14,14 +14,17 @@ const OrderProductionInputs = () => {
     console.log('effect')
     let renderArray = productionInputs.map((input, index) => {
       console.log(index)
-      return <Ink 
-              key={`ink-input-${index}`} 
-              quantity={index} 
-              types={'text,number,number,number,number,number'} 
-              data={`ink-color,quarter-input,k-input,input-quantity,input-tobuy,subtotal`} 
-              placeholders={'Rojo,25,100,1.6,2,200'}
-              labels={'Color,Precio 1/4,Precio 1k,Insumo,Comprar,Subtotal'}
-              fieldNames='ink,quarterKgPrice,oneKgPrice,input,quantityToBuy,totalPrice' />
+      return <>
+      <h3 className='production-input__title'>{`Tinta ${index+1}`}</h3>
+
+        <Ink key={`ink-input-${index}`} quantity={index} types={'text'} data={`ink-color`} placeholders={'Rojo'}labels={'Color'}fieldNames='ink' />
+        <Ink key={`ink-input-${index}`} quantity={index} types={'number'} data={`quarter-input`} placeholders={'25'}labels={'Precio 1/4'}fieldNames='quarterKgPrice' />
+        <Ink key={`ink-input-${index}`} quantity={index} types={'number'} data={`k-input`} placeholders={'100'}labels={'Precio 1k'}fieldNames='oneKgPrice' />
+        <Ink key={`ink-input-${index}`} quantity={index} types={'number'} data={`input-quantity`} placeholders={'1.6'}labels={'Insumo'}fieldNames='input' />
+        <Ink key={`ink-input-${index}`} quantity={index} types={'number'} data={`input-tobuy`} placeholders={'2'}labels={'Comprar'}fieldNames='quantityToBuy' />
+        <Ink key={`ink-input-${index}`} quantity={index} types={'number'} data={`subtotal`} placeholders={'200'}labels={'Subtotal'}fieldNames='totalPrice' />
+        </>
+      
     });
     setInputsArray(renderArray)
   }, [colors])
@@ -38,3 +41,4 @@ const OrderProductionInputs = () => {
 };
 
 export default OrderProductionInputs;
+
