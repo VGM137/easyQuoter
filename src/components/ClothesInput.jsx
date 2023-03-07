@@ -1,10 +1,9 @@
 import React, {useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeOrderSummary, changeOrderClothes, updateClothesDependencie } from '../actions';
-import SerigraphyClothesHeader from './SerigraphyClothesHeader';
 import '../assets/styles/components/Clothes.css';
 
-const Clothes = ({quantity, types, data, placeholders, fieldNames, labels}) => {
+const ClothesInput = ({quantity, type, data, placeholder, fieldName, label}) => {
   const dispatch = useDispatch()
   
   const totalClothes = useSelector(state => state.orderSummary.totalClothes)
@@ -13,6 +12,7 @@ const Clothes = ({quantity, types, data, placeholders, fieldNames, labels}) => {
   const digitalWorkPerHr = useSelector(state => state.orderSummary.digitalWork)
   const extraClothesTotal = useSelector(state => state.orderSummary.extraClothesTotal)
 
+  const clothesInputs = useSelector(state => state.serigraphyOrder?.clothes[quantity]?.[fieldName])
   const unitQuantity = useSelector(state => state.serigraphyOrder?.clothes[quantity]?.quantity)
   const unitPrice = useSelector(state => state.serigraphyOrder?.clothes[quantity]?.unitPrice)
   const extraGarment = useSelector(state => state.serigraphyOrder?.clothes[quantity]?.extra)
@@ -25,7 +25,7 @@ const Clothes = ({quantity, types, data, placeholders, fieldNames, labels}) => {
   const minimumWage = prePosProdLabour.minimumWage
 
   let inksTotal = 0
-  prodInputs.map(input => inksTotal += input.totalPrice)
+  prodInputs.map(input => inksTotal += parseFloat(input.totalPrice))
 
   let productionInputCost = 0
   Object.values(prePosProdInputs).map(input => productionInputCost += input)
@@ -37,21 +37,15 @@ const Clothes = ({quantity, types, data, placeholders, fieldNames, labels}) => {
   let prePosProductionLabourTime = 0
   Object.values(prePosProdLabour).map((time, index) => index === 0 ? '' : prePosProductionLabourTime += time)
 
-  let inputTypes = types.split(',')
-  let inputData = data.split(',')
-  let inputPlaceholders = placeholders.split(',')
-  let inputFields = fieldNames.split(',')
-  let inputLabels = labels.split(',')
-
-  const handleInput = (e, fieldName, index) => {
-    let regex = /^\d+$/
-    let value = e.target.value.match(regex) ? parseInt(e.target.value) : e.target.value
+  const handleInput = (e, fieldName) => {
+    let regex = /(?:[1-9][0-9]*|0)(?:\/[1-9][0-9]*)?/
+    let value = e.target.value.match(regex) ? parseFloat(e.target.value) : e.target.value
     let data = [quantity, fieldName, value]
     
     dispatch(changeOrderClothes(data))
     if(fieldName === 'extra'){
       console.log(extraClothesTotal)
-      let newValue = parseInt(extraClothesTotal) + value
+      let newValue = parseFloat(extraClothesTotal) + value
       let summaryData = ['extraClothesTotal', newValue]
       dispatch(changeOrderSummary(summaryData))
     }
@@ -61,12 +55,12 @@ const Clothes = ({quantity, types, data, placeholders, fieldNames, labels}) => {
     let garmentTotalCost = (unitQuantity+extraGarment)*unitPrice || 0
     let digitalWorkCost = ((digitalWorkPerHr)/totalClothes)*unitQuantity || 0
     let logisticsCost = (logistics/totalClothes)*unitQuantity || 0
-    let testInputsCost = (extraGarment/totalClothes)*unitQuantity || 0
+    /* let testInputsCost = (extraGarment/totalClothes)*unitQuantity || 0 */
     let inkInput = (inksTotal/totalClothes)*unitQuantity || 0
     let productionInputTotal = ((productionInputCost*totalColors)/totalClothes)*unitQuantity || 0
     let productionLabourTotal = ((productionLabourCost*totalColors*(totalClothes+extraClothesTotal))/totalClothes)*unitQuantity || 0
     let prePosProductionLabourTotal = (( (((minimumWage/8)*prePosProductionLabourTime)/60) * totalColors )/totalClothes)*unitQuantity || 0
-    let costWOGarmantSubtotal = digitalWorkCost+logisticsCost+testInputsCost+inkInput+productionInputTotal+productionLabourTotal+prePosProductionLabourTotal || 0
+    let costWOGarmantSubtotal = digitalWorkCost+logisticsCost+inkInput+productionInputTotal+productionLabourTotal+prePosProductionLabourTotal || 0
     let unitCostWOGarmantSubtotal = costWOGarmantSubtotal/unitQuantity || 0
     let totalCost = garmentTotalCost+costWOGarmantSubtotal || 0
     let unitTotalCost = totalCost/unitQuantity || 0
@@ -75,7 +69,7 @@ const Clothes = ({quantity, types, data, placeholders, fieldNames, labels}) => {
     dispatch(updateClothesDependencie([quantity, 'totalPrice', parseFloat(garmentTotalCost.toFixed(2))]))
     dispatch(updateClothesDependencie([quantity, 'digitalWork', parseFloat(digitalWorkCost.toFixed(2))]))
     dispatch(updateClothesDependencie([quantity, 'logistics', parseFloat(logisticsCost.toFixed(2))]))
-    dispatch(updateClothesDependencie([quantity, 'testInputs', parseFloat(testInputsCost.toFixed(2))]))
+    /* dispatch(updateClothesDependencie([quantity, 'testInputs', parseFloat(testInputsCost.toFixed(2))])) */
     dispatch(updateClothesDependencie([quantity, 'inkInput', parseFloat(inkInput.toFixed(2))]))
     dispatch(updateClothesDependencie([quantity, 'prePostProdInputs', parseFloat(productionInputTotal.toFixed(2))]))
     dispatch(updateClothesDependencie([quantity, 'prodLabour', parseFloat(productionLabourTotal.toFixed(2))]))
@@ -95,31 +89,29 @@ const Clothes = ({quantity, types, data, placeholders, fieldNames, labels}) => {
       prodInputs,
       prePosProdInputs,
       prodLabourCosts,
-      prePosProdLabour
+      prePosProdLabour,
+      extraGarment
      ])
   
   return (
     <>
-    <div id="" className="serigraphy-clothes__wrapper">
-      <SerigraphyClothesHeader quantity={quantity} />
-      {inputTypes.map((type, index) => {
-        return <div key={`clothes-wrapper-${quantity}-${index}`} className='clothes-wrapper'> <input 
-          key={`clothes-${quantity}-${index}`}
+      <div key={`clothes-wrapper-${quantity}`} className='clothes-wrapper'> 
+        <input 
+          key={`clothes-${quantity}`}
           data-number={quantity}
-          data-name={inputFields[index]}
+          data-name={fieldName}
           type={type} 
-          className={`${inputData[index]}-input__group`} 
-          placeholder={inputPlaceholders[index]} 
-          onInput={(e) => handleInput(e, inputFields[index], index)}
+          className={`${data}-input__group`} 
+          placeholder={placeholder} 
+          onInput={(e) => handleInput(e, fieldName)}
+          value={clothesInputs || ''}
         >
         </input>
-        <label key={`clothes-label-${quantity}-${index}`} className='input-label'>{inputLabels[index]}</label>
-        </div>
-      })}
-    </div>
+        <label key={`clothes-label-${quantity}`} className='input-label'>{label}</label>
+      </div>
     </>
   )
 };
 
 
-export default Clothes;
+export default ClothesInput;

@@ -7,8 +7,10 @@ const ConfigurableInputs = ({type, data, placeholder, label, level}) => {
 
   let dispatch = useDispatch()
 
+  let inputValue = useSelector(state => state.serigraphyOrder[level][data])
+
   const handleInput = (e, data) => {
-    let value = parseFloat(e.target.value)
+    let value = parseFloat(e.target.value) || 0
     let payload = [data, value]
     if(level === 'prePosProdInputs'){
       dispatch(configProdInputs(payload))
@@ -25,14 +27,14 @@ const ConfigurableInputs = ({type, data, placeholder, label, level}) => {
   }
   
   return (
-    <div id="" className="input-wrapper">
+    <div id="" className="config-input__wrapper">
       <input 
         min={0} 
         type={type} 
         className={`${data}Input`} 
-        /* onBlur={(e) => handleBlur(e, data)}  */
         onInput={(e) => handleInput(e, data)} 
-        placeholder={placeholder} >
+        placeholder={placeholder} 
+        value={inputValue || ''} >
       </input>
       <label className='input-label'>{label}</label>
     </div>

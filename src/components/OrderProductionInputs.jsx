@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import Ink from './Ink';
+import InkInput from './InkInput';
 import '../assets/styles/components/OrderProductionInputs.css';
 
 const OrderProductionInputs = () => {
@@ -14,16 +14,17 @@ const OrderProductionInputs = () => {
     console.log('effect')
     let renderArray = productionInputs.map((input, index) => {
       console.log(index)
-      return <>
-      <h3 className='production-input__title'>{`Tinta ${index+1}`}</h3>
-
-        <Ink key={`ink-input-${index}`} quantity={index} types={'text'} data={`ink-color`} placeholders={'Rojo'}labels={'Color'}fieldNames='ink' />
-        <Ink key={`ink-input-${index}`} quantity={index} types={'number'} data={`quarter-input`} placeholders={'25'}labels={'Precio 1/4'}fieldNames='quarterKgPrice' />
-        <Ink key={`ink-input-${index}`} quantity={index} types={'number'} data={`k-input`} placeholders={'100'}labels={'Precio 1k'}fieldNames='oneKgPrice' />
-        <Ink key={`ink-input-${index}`} quantity={index} types={'number'} data={`input-quantity`} placeholders={'1.6'}labels={'Insumo'}fieldNames='input' />
-        <Ink key={`ink-input-${index}`} quantity={index} types={'number'} data={`input-tobuy`} placeholders={'2'}labels={'Comprar'}fieldNames='quantityToBuy' />
-        <Ink key={`ink-input-${index}`} quantity={index} types={'number'} data={`subtotal`} placeholders={'200'}labels={'Subtotal'}fieldNames='totalPrice' />
-        </>
+      
+      return <div key={`ink-wrapper-${index}`} id="" className="production__inputs-wrapper">
+                <h3 key={`ink-title-${index}`} className='production-input__title'>{`Tinta ${index+1}`}</h3>
+                <InkInput key={`ink-${`ink-color`}-${index}`} quantity={index} type={'text'} data={`ink-color`} placeholder={'Rojo'}label={'Color'}fieldName='ink' />
+                <InkInput key={`ink-${`quarter-input`}-${index}`} quantity={index} type={'number'} data={`quarter-input`} placeholder={'25'}label={'Precio 1/4'}fieldName='quarterKgPrice' />
+                <InkInput key={`ink-${`k-input`}-${index}`} quantity={index} type={'number'} data={`k-input`} placeholder={'100'}label={'Precio 1k'}fieldName='oneKgPrice' />
+                <InkInput key={`ink-${`input-quantity`}-${index}`} quantity={index} type={'number'} data={`input-quantity`} placeholder={'1.6'}label={'Insumo'}fieldName='input' />
+                <InkInput key={`ink-${`input-tobuy`}-${index}`} quantity={index} type={'number'} data={`input-tobuy`} placeholder={'2'}label={'Comprar'}fieldName='quantityToBuy' />
+                <InkInput key={`ink-${`subtotal`}-${index}`} quantity={index} type={'number'} data={`subtotal`} placeholder={'200'}label={'Subtotal'}fieldName='totalPrice' />
+              </div>
+              
       
     });
     setInputsArray(renderArray)

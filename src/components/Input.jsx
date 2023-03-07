@@ -32,7 +32,7 @@ const Input = ({type, data, placeholder, label}) => {
 
   const handleBlur = async (e, level) => {
     if(level === 'totalColors'){
-      let value = [level, e.target.value]
+      let value = [level, parseFloat(e.target.value)]
       dispatch(changeOrderSummary(value))
   
       let inputsLength = productionInputs.length

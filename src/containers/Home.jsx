@@ -6,6 +6,7 @@ import Configurations from '../components/Configurations';
 import OrderSummary from '../components/OrderSummary';
 import SerigraphyOrder from '../components/SerigraphyOrder';
 import OrderProductionInputs from '../components/OrderProductionInputs';
+import Ticket from '../components/Ticket';
 import '../assets/styles/App.css'
 
 const Home = () => {
@@ -32,6 +33,7 @@ const Home = () => {
             <OrderSummary />
             <SerigraphyOrder />
             <OrderProductionInputs />
+            <Ticket />
           </>
       }
     </main>

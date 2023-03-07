@@ -10,6 +10,7 @@ const initialState = {
   showSerigraphyCard: true,
   showInksCard: true,
   showConfigurations: false,
+  ticket: 'partner',
   orderSummary: {
     admin: '',
     projectName: '',
@@ -20,9 +21,13 @@ const initialState = {
     digitalWork: 0,
     logistics: 0,
     extraClothesTotal: 0,//Crear suma para el estado
-    clientCode: '',
-    clothingCode: '',
-    dueDateCode: ''
+    clientCode: 2,
+    clothingCode: 1,
+    dueDateCode: 1,
+    percentageClient: 0.2,
+    percentagePieces: 0.1,
+    percentageDeliver: 0.1,
+    profit: 0.4,
   },
   serigraphyOrder: {
     clothes: [{
@@ -50,6 +55,9 @@ const initialState = {
       profit: 0,
       price: 0,
       taxes: 0,
+      USale: 0,
+      UQuote: 0,
+      algarin: 0,
     }],
     productionInputs: [{
       ink: '',
