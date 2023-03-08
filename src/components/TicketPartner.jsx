@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import '../assets/styles/components/Ticket.css';
+import ClothesInput from './ClothesInput';
+import '../assets/styles/components/TicketPartner.css';
 
 const TicketPartner = () => {
 
@@ -35,13 +36,17 @@ const TicketPartner = () => {
 
   return (
     <section className="ticket-partner__wrapper">
+      <div className='ticket-partner__header'>
+        <h4>Prenda</h4>
+        <h4>Venta 365</h4>
+        <h4>Subtotal</h4>
+      </div>
       <div className='ticket-partner__garment'>
       {clothes.map((clothes, i) => {
         return <div key={`ticket-partner-${i}`} className='ticket-partner__content'>
           <p key={`ticket-type-${i}`}>{clothes.type}</p>
+          <ClothesInput key={`clothes-clothes-365sale-${i}`} quantity={i} type={'number'} data={`clothes-365sale`} placeholder={'350'}label={'Venta 365'}fieldName='USale' />
           <p key={`ticket-sale-${i}`}>{parseFloat(saleArray[i]).toFixed(2)}</p>
-          <p key={`ticket-profit-${i}`}>{parseFloat(clothes.prodUnitCost*orderSummary.profit).toFixed(2)}</p>
-          <p key={`ticket-cost-${i}`}>{parseFloat(clothes.prodUnitCost+(clothes.prodUnitCost*orderSummary.profit)).toFixed(2)}</p>
         </div>
       })}
       </div>

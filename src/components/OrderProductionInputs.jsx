@@ -34,6 +34,7 @@ const OrderProductionInputs = () => {
     <>
       {colors > 0 &&
         <section id="OrderProductionInputs" className="production-inputs__container container-wrapper">
+          <h3 className='inks-title'>Tintas</h3>
           {inputsArray}
         </section>
       }

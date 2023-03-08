@@ -9,6 +9,7 @@ const OrderSummary = () => {
   
   return (
     <section id="OrderSummary" className="order-summary__wrapper container-wrapper">
+      <h3 className='summary-title'>Resumen</h3>
       <div className='order-summary__input'>
         <Input type={'text'} data={'admin'} placeholder={'Juanito'} label={'Socio'} />
         <Input type={'text'} data={'projectName'} placeholder={'Sudaderas de basquetbol'} label={'Proyecto'} />
