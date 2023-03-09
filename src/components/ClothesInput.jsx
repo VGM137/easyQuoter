@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { changeOrderSummary, changeOrderClothes, updateClothesDependencie } from '../actions';
 import '../assets/styles/components/Clothes.css';
 
-const ClothesInput = ({quantity, type, data, placeholder, fieldName, label}) => {
+const ClothesInput = ({quantity, type, data, placeholder, fieldName, label, value}) => {
   const dispatch = useDispatch()
   
   const totalClothes = useSelector(state => state.orderSummary.totalClothes)
@@ -12,6 +12,7 @@ const ClothesInput = ({quantity, type, data, placeholder, fieldName, label}) => 
   const digitalWorkPerHr = useSelector(state => state.orderSummary.digitalWork)
   const extraClothesTotal = useSelector(state => state.orderSummary.extraClothesTotal)
 
+  const clothes = useSelector(state => state.serigraphyOrder?.clothes)
   const clothesInputs = useSelector(state => state.serigraphyOrder?.clothes[quantity]?.[fieldName])
   const unitQuantity = useSelector(state => state.serigraphyOrder?.clothes[quantity]?.quantity)
   const unitPrice = useSelector(state => state.serigraphyOrder?.clothes[quantity]?.unitPrice)
@@ -44,8 +45,10 @@ const ClothesInput = ({quantity, type, data, placeholder, fieldName, label}) => 
     
     dispatch(changeOrderClothes(data))
     if(fieldName === 'extra'){
+      console.log(e)
       console.log(extraClothesTotal)
-      let newValue = parseFloat(extraClothesTotal) + value
+      let extraClothesArray = clothes.map(clothes => clothes.extra)
+      let newValue = extraClothesArray.reduce((a,b) =>  a = a + b , 0 )
       let summaryData = ['extraClothesTotal', newValue]
       dispatch(changeOrderSummary(summaryData))
     }
@@ -96,17 +99,32 @@ const ClothesInput = ({quantity, type, data, placeholder, fieldName, label}) => 
   return (
     <>
       <div key={`clothes-wrapper-${quantity}`} className='clothes-wrapper'> 
-        <input 
-          key={`clothes-${quantity}`}
-          data-number={quantity}
-          data-name={fieldName}
-          type={type} 
-          className={`${data}-input__group`} 
-          placeholder={placeholder} 
-          onInput={(e) => handleInput(e, fieldName)}
-          value={clothesInputs || ''}
-        >
-        </input>
+        {fieldName === 'UQuote' 
+          ?
+            <input 
+              key={`clothes-${quantity}`}
+              data-number={quantity}
+              data-name={fieldName}
+              type={type} 
+              className={`${data}-input__group`} 
+              placeholder={placeholder} 
+              onInput={(e) => handleInput(e, fieldName)}
+              value={value || ''}
+            >
+            </input>
+          :
+            <input 
+              key={`clothes-${quantity}`}
+              data-number={quantity}
+              data-name={fieldName}
+              type={type} 
+              className={`${data}-input__group`} 
+              placeholder={placeholder} 
+              onInput={(e) => handleInput(e, fieldName)}
+              value={clothesInputs || ''}
+            >
+            </input>
+        }
         <label key={`clothes-label-${quantity}`} className='input-label'>{label}</label>
       </div>
     </>

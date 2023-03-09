@@ -23,9 +23,9 @@ const SerigraphyOrderInputs = () => {
                 <ClothesInput key={`clothes-clothes-quantity-${index}`} quantity={index} type={'text'} data={`clothes-quantity`} placeholder={'12'}label={'Cantidad'}fieldName='quantity' />
                 <ClothesInput key={`clothes-extra-garment-${index}`} quantity={index} type={'number'} data={`extra-garment`} placeholder={'1'}label={'Prenda extra'}fieldName='extra' />
                 <ClothesInput key={`clothes-clothes-unitPrice-${index}`} quantity={index} type={'number'} data={`clothes-unitPrice`} placeholder={'52'}label={'Precio unitario'}fieldName='unitPrice' />
-                <ClothesInput key={`clothes-clothes-365sale-${index}`} quantity={index} type={'number'} data={`clothes-365sale`} placeholder={'350'}label={'Venta 365'}fieldName='USale' />
-                <ClothesInput key={`clothes-clothes-365quote-${index}`} quantity={index} type={'number'} data={`clothes-365quote`} placeholder={'140'}label={'Cotización 365'}fieldName='UQuote' />
-                <ClothesInput key={`clothes-clothes-algarin-${index}`} quantity={index} type={'number'} data={`clothes-algarin`} placeholder={'80'}label={'Algarín'}fieldName='algarin' />
+                {/* <ClothesInput key={`clothes-clothes-365sale-${index}`} quantity={index} type={'number'} data={`clothes-365sale`} placeholder={'350'}label={'Venta 365'}fieldName='USale' /> */}
+                {/* <ClothesInput key={`clothes-clothes-365quote-${index}`} quantity={index} type={'number'} data={`clothes-365quote`} placeholder={'140'}label={'Cotización 365'}fieldName='UQuote' /> */}
+                {/* <ClothesInput key={`clothes-clothes-algarin-${index}`} quantity={index} type={'number'} data={`clothes-algarin`} placeholder={'80'}label={'Algarín'}fieldName='algarin' /> */}
               </div>
     })
     setClothesCostsArray(renderArray)

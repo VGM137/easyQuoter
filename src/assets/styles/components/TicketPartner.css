@@ -1,0 +1,85 @@
+.ticket-partner__wrapper{
+  width: 100%;
+  margin: 0;
+  color: white;
+  font-size: 28px;
+  background-color: #7986cb;
+  padding: 10px 0;
+}
+.ticket-partner__wrapper div{
+  width: 90%;
+  margin: 10px auto;
+}
+
+.ticket-partner__header{
+  display: flex;
+  margin: 0 auto 10px ;
+}
+.ticket-partner__header h4{
+  text-align: center;
+  overflow: hidden;
+  width: 30%;
+  margin: auto;
+  font-size: .5em;
+  font-weight: 300;
+}
+.ticket-partner__header h4:first-child{
+  text-align: start;
+  width: 60%!important;
+}
+
+.ticket-partner__content{
+  display: flex;
+  width: 100%!important;
+  justify-content: space-around;
+  margin: 5px 0;
+}
+.ticket-partner__content:last-child{
+  margin: 0 auto 10px;
+  padding: 0 0 10px;
+  border-bottom: 1px solid white;
+}
+.ticket-partner__content p{
+  text-align: end;
+  overflow: hidden;
+  width: 30%;
+  margin: auto;
+  white-space: nowrap;
+}
+.ticket-partner__content p:first-child{
+  text-align: start!important;
+  width: 60%!important;
+}
+.ticket-partner__totals{
+  display: flex;
+  width: 100%;
+}
+.ticket-partner__totals p:nth-child(odd){
+  text-align: end;
+  width: 70%;
+  margin: 5px 0;
+}
+.ticket-partner__totals p{
+  text-align: end;
+  width: 30%;
+  margin: 5px 0;
+}
+
+
+.ticket-partner__content .clothes-wrapper{
+  border: white solid 1px;
+  width: 30%;
+  height: 100%;
+}
+.ticket-partner__content .clothes-wrapper input {
+  text-align: end;
+  margin: 0;
+  padding: 0 10px 0 0;
+  color: white;
+}
+.ticket-partner__content .clothes-wrapper input::placeholder {
+  color: rgba(255, 255, 255, 0.8);
+}
+.ticket-partner__content .clothes-wrapper label {
+  display: none;
+}

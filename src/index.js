@@ -23,11 +23,7 @@ const initialState = {
     extraClothesTotal: 0,//Crear suma para el estado
     clientCode: 2,
     clothingCode: 1,
-    dueDateCode: 1,
-    percentageClient: 0.2,
-    percentagePieces: 0.1,
-    percentageDeliver: 0.1,
-    profit: 0.4,
+    dueDateCode: 1
   },
   serigraphyOrder: {
     clothes: [{
