@@ -11,19 +11,19 @@ const reducer = (state, action) => {
     case 'CONFIG_LABOUR':
       return {
         ...state,
-        serigraphyOrder: {...state.serigraphyOrder, prePosProdLabour: {...state.serigraphyOrder.prePosProdInputs, [action.payload[0]]: action.payload[1]}}
+        serigraphyOrder: {...state.serigraphyOrder, prePosProdLabour: {...state.serigraphyOrder.prePosProdLabour, [action.payload[0]]: action.payload[1]}}
       }
     
     case 'CONFIG_LABOUR_COST':
       return {
         ...state,
-        serigraphyOrder: {...state.serigraphyOrder, prodLabourCosts: {...state.serigraphyOrder.prePosProdInputs, [action.payload[0]]: action.payload[1]}}
+        serigraphyOrder: {...state.serigraphyOrder, prodLabourCosts: {...state.serigraphyOrder.prodLabourCosts, [action.payload[0]]: action.payload[1]}}
       }
     
     case 'CONFIG_LABOUR_TIME':
       return {
         ...state,
-        serigraphyOrder: {...state.serigraphyOrder, prodLabourTime: {...state.serigraphyOrder.prePosProdInputs, [action.payload[0]]: action.payload[1]}}
+        serigraphyOrder: {...state.serigraphyOrder, prodLabourTime: {...state.serigraphyOrder.prodLabourTime, [action.payload[0]]: action.payload[1]}}
       }
     
     case 'SHOW_CONFIG':
@@ -126,6 +126,12 @@ const reducer = (state, action) => {
       return {
           ...state,
           orderSummary: {...state.orderSummary, extraClothesTotal: action.payload}
+        }
+
+    case 'UPDATE_TICKET':
+      return {
+          ...state,
+          ticket: action.payload
         }
 
     default :

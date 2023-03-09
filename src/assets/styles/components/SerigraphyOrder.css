@@ -1,7 +1,16 @@
 .serigraphy-order__wrapper{
   position: relative;
 }
-.serigraphy-clothes__cost-wrapper:nth-child(-n+2){
+.serigraphy-order__title{
+  margin: 0;
+  font-weight: 300;
+  color: #75758b;
+  font-size: 24px;
+  text-align: center;
+  padding: 10px;
+  background-color: white;
+}
+.serigraphy-clothes__cost-wrapper:nth-child(-n+3){
   border-top: none!important;
 }
 .serigraphy-order__see-button{
