@@ -1,0 +1,28 @@
+.order-summary__wrapper{
+  display: flex;
+  flex-direction: column;
+  padding: 20px!important;
+}
+.order-summary__input{
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+.order-summary__input div:nth-child(odd){
+  margin: 20px auto 0 0;
+}
+.order-summary__input div:nth-child(even){
+  margin: 20px 0 0 auto;
+}
+.order-summary__select div:nth-child(1){
+  margin: 20px auto 0 0;
+}
+.order-summary__select div:nth-child(2){
+  margin: 20px auto 0;
+}
+.order-summary__select div:nth-child(3){
+  margin: 20px 0 0 auto;
+}
+.order-summary__select{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}

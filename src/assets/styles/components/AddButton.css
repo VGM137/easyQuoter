@@ -1,0 +1,13 @@
+.add-button__wrapper{
+  justify-content: right;
+  display: flex;
+  margin: 15px 0;
+}
+.add-button{
+  background-color: #7986cb;
+  border: none;
+  border-radius: 10px;
+  height: 37px;
+  padding: 10px;
+  color: white;
+}

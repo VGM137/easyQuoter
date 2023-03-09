@@ -1,0 +1,29 @@
+.serigraphy-order__wrapper{
+  position: relative;
+}
+.serigraphy-clothes__cost-wrapper:nth-child(-n+2){
+  border-top: none!important;
+}
+.serigraphy-order__see-button{
+  position: absolute;
+  right: 0;
+  top: 0;
+  border: none;
+  outline: none;
+  background-color: #7986cb;
+  border-radius: 0 0 0 10px;
+  color: white;
+  padding: 10px;
+}
+.serigraphy-clothes__cost-wrapper{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  border-top: black 1px solid;
+  margin: 10px 0;
+  padding: 1.4em 0 10px;
+  position: relative;
+}
+.serigraphy-clothes__cost-wrapper .input-wrapper{
+  margin: 10px auto 0;
+}
+.serigraphy-clothes__title{}

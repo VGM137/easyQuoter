@@ -1,0 +1,21 @@
+
+.production-input__title{
+  position: absolute;
+  margin: 0 10px;
+  font-size: .6em;
+  top: 0.9em;
+  left: 0;
+  font-weight: 300;
+  color: #75758b;
+}
+.production-colors__titles,
+.production__inputs-wrapper{
+  display: grid;
+  grid-template-columns: repeat(3, 33.33%);
+  margin: 10px 0;
+  padding: 1.4em 0 10px;
+  position: relative;
+}
+.production__inputs-wrapper .input-wrapper{
+  margin-top: 15px;
+}

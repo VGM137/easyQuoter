@@ -1,0 +1,64 @@
+@font-face {
+  font-family: 'Finger Paint', cursive;
+  src: url('https://fonts.googleapis.com/css2?family=Finger+Paint&family=Rock+Salt&display=swap');
+}
+*{
+  box-sizing: border-box;
+}
+
+body{
+  margin: 0;
+  font-size: 2.2em;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: rgb(255, 255, 255);
+  box-sizing: border-box;
+  padding: 10px;
+}
+input, select {
+  border: none;
+  background: none;
+  font-size: .45em;
+}
+input:focus, select:focus {
+  border: none;
+  background: none;
+  outline: none;
+}
+input::placeholder, select::placeholder {
+  opacity: 0.4;
+}
+p {
+  margin: 15px auto auto;
+  text-align: center;
+  width: 100%;
+  font-size: 0.5em;
+}
+
+.input-label{
+  font-size: .4em;
+  position: absolute;
+  top: -0.6em;
+  left: 8px;
+  background: white;
+  padding: 0 3px;
+  color: rgba(134, 134, 134, 0.849)
+}
+.select-label{
+  font-size: .4em;
+  position: absolute;
+  top: -0.6em;
+  left: 8px;
+  background: white;
+  padding: 0 3px;
+  color: rgba(134, 134, 134, 0.849)
+}
+
+.container-wrapper{
+  width: 90%;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  box-shadow: 0px 0px 7px 1px rgb(0 0 0 / 20%);
+  margin: 15px auto;
+  padding: 10px;
+  overflow: hidden;
+}
