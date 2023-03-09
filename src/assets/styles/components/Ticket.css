@@ -1,20 +1,30 @@
 .ticket-wrapper{
   width: 90%;
-  background-color: #7986cb;
   border-radius: 10px;
   box-shadow: 0px 0px 7px 1px rgb(0 0 0 / 20%);
   margin: 15px auto;
   overflow: hidden;
 }
+.ticket-title{
+  margin: 0;
+  font-weight: 300;
+  color: #75758b;
+  font-size: 24px;
+  text-align: center;
+  padding: 10px;
+  background-color: white;
+}
 
 .ticket-header__wrapper{
-  background-color: white;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  background: rgb(122,134,204);
+  background: linear-gradient(0deg, rgba(122,134,204,1) 49%, rgba(255,255,255,0) 50%);
 }
 .ticket-active{
   background-color: #7986cb!important;
   color: white!important;
+  border-radius: 5px 5px 0 0;
 }
 .ticket-button{
   outline: none;
@@ -24,44 +34,5 @@
   margin: auto;
   width: 100%;
   justify-content: center;
-}
-.ticket-partner__wrapper{
-  width: 90%;
-  margin: 10px auto;
-  color: white;
-  font-size: 28px;
-}
-
-.ticket-partner__content{
-  display: flex;
-  width: 100%;
-  justify-content: space-around;
-}
-.ticket-partner__content:last-child{
-  margin: 0 auto 10px;
-  padding: 0 0 10px;
-  border-bottom: 1px solid white;
-}
-.ticket-partner__content p{
-  text-align: end;
-  overflow: hidden;
-  width: 20%;
-}
-.ticket-partner__content p:first-child{
-  text-align: start!important;
-  width: 40%!important;
-}
-.ticket-partner__totals{
-  display: flex;
-  width: 60%;
-}
-.ticket-partner__totals p:nth-child(odd){
-  text-align: end;
-  width: 60%;
-  margin: 5px 0;
-}
-.ticket-partner__totals p{
-  text-align: end;
-  width: 40%;
-  margin: 5px 0;
+  background-color: white;
 }

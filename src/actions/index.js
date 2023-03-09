@@ -69,3 +69,8 @@ export const updateExtraClothesTotal = (payload) => ({
   type: "UPDATE_ECTOTAL",
   payload 
  });
+
+ export const changeTicketState = (payload) => ({
+  type: "UPDATE_TICKET",
+  payload 
+ });

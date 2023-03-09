@@ -20,6 +20,7 @@ const SerigraphyOrder = () => {
   return (
     <section id="SerigraphyOrder" className="serigraphy-order__wrapper container-wrapper">
       <button className='serigraphy-order__see-button' onClick={(e) => handleClick()}>{showSerigraphyCard ? 'Ver costos' : 'Ver productos'}</button>
+      <h3 className='serigraphy-order__title'>Tintas</h3>
       {showSerigraphyCard 
         ?
         <SerigraphyOrderInputs />

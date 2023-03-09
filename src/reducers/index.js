@@ -128,6 +128,12 @@ const reducer = (state, action) => {
           orderSummary: {...state.orderSummary, extraClothesTotal: action.payload}
         }
 
+    case 'UPDATE_TICKET':
+      return {
+          ...state,
+          ticket: action.payload
+        }
+
     default :
     return state;
   }

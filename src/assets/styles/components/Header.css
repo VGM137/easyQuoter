@@ -1,0 +1,17 @@
+.header-wrapper{
+  height: auto;
+  padding: 20px 10px;
+  width: 100%;
+  box-shadow: 1px 7px 20px 4px rgb(177 177 179 / 40%);
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+.config-button{
+  background-color: #7986cb;
+  border: none;
+  border-radius: 100px;
+  color: #fff;
+  outline: none;
+  padding: 10px;
+}
