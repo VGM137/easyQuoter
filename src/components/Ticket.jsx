@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import TicketHeader from './TicketHeader';
 import TicketPartner from './TicketPartner';
 import TicketClient from './TicketClient';
+import TicketAlgarin from './TicketAlgarin';
 import '../assets/styles/components/Ticket.css';
 
 const Ticket = () => {
@@ -22,7 +23,7 @@ const Ticket = () => {
         <TicketClient />
       }
       {ticketType === 'algarin' &&
-        <TicketPartner />
+        <TicketAlgarin />
       }
     </section>
   )

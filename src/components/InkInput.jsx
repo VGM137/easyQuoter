@@ -38,6 +38,16 @@ const InkInput = ({quantity, type, data, placeholder, fieldName, label}) => {
     var quarter = 0.25;
     return Math.ceil(number/quarter) * quarter;
   }
+
+  let inputWrapper = document.querySelectorAll('.input-wrapper')
+  inputWrapper.forEach(input => {
+    let inputs = input.querySelectorAll('input')
+    inputs.forEach((inp) => {
+      inp.addEventListener('wheel', function (e){
+        e.preventDefault()
+      }, {passive: false})
+    })
+  })
   
   return (
     <>
@@ -68,6 +78,7 @@ const InkInput = ({quantity, type, data, placeholder, fieldName, label}) => {
             placeholder={placeholder} 
             onInput={(e) => handleInput(e, fieldName)}
             value={productInputs || ''}
+            min={0}
           >
           </input>
         }

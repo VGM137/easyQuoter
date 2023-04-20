@@ -45,10 +45,12 @@ const ClothesInput = ({quantity, type, data, placeholder, fieldName, label, valu
     
     dispatch(changeOrderClothes(data))
     if(fieldName === 'extra'){
-      console.log(e)
-      console.log(extraClothesTotal)
-      let extraClothesArray = clothes.map(clothes => clothes.extra)
-      let newValue = extraClothesArray.reduce((a,b) =>  a = a + b , 0 )
+      let extraClothesArray = clothes.map(clothes => typeof clothes.extra == 'number' ? parseFloat(clothes.extra) : 0)
+      let reduce = extraClothesArray.reduce((a,b) =>  a = a + b , 0)
+      let newValue = reduce+value
+      console.log(fieldName)
+      console.log(extraClothesArray)
+      console.log(newValue)
       let summaryData = ['extraClothesTotal', newValue]
       dispatch(changeOrderSummary(summaryData))
     }
@@ -95,36 +97,32 @@ const ClothesInput = ({quantity, type, data, placeholder, fieldName, label, valu
       prePosProdLabour,
       extraGarment
      ])
-  
+
+  let inputWrapper = document.querySelectorAll('.clothes-wrapper')
+  inputWrapper.forEach(input => {
+    let inputs = input.querySelectorAll('input')
+    inputs.forEach((inp) => {
+      inp.addEventListener('wheel', function (e){
+        e.preventDefault()
+      }, {passive: false})
+    })
+  })
+     
   return (
     <>
       <div key={`clothes-wrapper-${quantity}`} className='clothes-wrapper'> 
-        {fieldName === 'UQuote' 
-          ?
-            <input 
-              key={`clothes-${quantity}`}
-              data-number={quantity}
-              data-name={fieldName}
-              type={type} 
-              className={`${data}-input__group`} 
-              placeholder={placeholder} 
-              onInput={(e) => handleInput(e, fieldName)}
-              value={value || ''}
-            >
-            </input>
-          :
-            <input 
-              key={`clothes-${quantity}`}
-              data-number={quantity}
-              data-name={fieldName}
-              type={type} 
-              className={`${data}-input__group`} 
-              placeholder={placeholder} 
-              onInput={(e) => handleInput(e, fieldName)}
-              value={clothesInputs || ''}
-            >
-            </input>
-        }
+        <input 
+          key={`clothes-${quantity}`}
+          data-number={quantity}
+          data-name={fieldName}
+          type={type} 
+          className={`${data}-input__group`} 
+          placeholder={placeholder} 
+          onInput={(e) => handleInput(e, fieldName)}
+          value={clothesInputs || ''}
+          min={0}
+        >
+        </input>
         <label key={`clothes-label-${quantity}`} className='input-label'>{label}</label>
       </div>
     </>

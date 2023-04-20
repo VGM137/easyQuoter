@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { updateClothesDependencie } from '../actions';
+import { changeOrderSummary } from '../actions';
 import ClothesInput from './ClothesInput';
+import TicketLineItem from './TicketLineItem';
 import '../assets/styles/components/TicketClient.css';
 
 const TicketClient = () => {
@@ -10,16 +11,10 @@ const TicketClient = () => {
   const [totalsArray, setTotals] = useState([])
   const [labourCostArray, setLabourCost] = useState([])
   const [prePosLabourCostArray, setPrePosLabourCost] = useState([])
+  /* const [ticketCost, setTicketCost] = useState([]) */
 
   let dispatch = useDispatch()
   let clothes = useSelector(state => state.serigraphyOrder.clothes)
-  let orderSummary = useSelector(state => state.orderSummary)
-  let clientCode = orderSummary.clientCode
-  let clothingCode = orderSummary.clothingCode
-  let dueDateCode = orderSummary.dueDateCode
-
-  let profit = (clientCode/10)+((clothingCode*clothingCode)/10)+((dueDateCode*dueDateCode)/10)
-  console.log(profit)
 
   const formatOptions = { style: 'currency', currency: 'MXN' };
   const currencyFormat = new Intl.NumberFormat('es-MX', formatOptions)
@@ -30,7 +25,6 @@ const TicketClient = () => {
     let totalLabourCost = []
     let totalPrePosLabourCost = []
     clothes.map((clothes, i) => {
-      /* dispatch(updateClothesDependencie(i, 'UQuote', roundToNearestFive(parseFloat(clothes.prodUnitCost+(clothes.prodUnitCost*profit)).toFixed(2)))) */
       sale.push(clothes.UQuote*clothes.quantity || 0)
       totalCost.push(clothes.prodTotalCost || 0)
       totalLabourCost.push(clothes.prodLabour || 0)
@@ -41,11 +35,10 @@ const TicketClient = () => {
     setTotals(totalCost)
     setLabourCost(totalLabourCost)
     setPrePosLabourCost(totalPrePosLabourCost)
+    let profit2 = ((saleArray.reduce((a,b) =>  a = a + b , 0 ))-(totalsArray.reduce((a,b) =>  a = a + b , 0 ))) + (labourCostArray.reduce((a,b) =>  a = a + b , 0 )) + (prePosLabourCostArray.reduce((a,b) =>  a = a + b , 0 ))
+    dispatch(changeOrderSummary('profitTwo', parseFloat(profit2)))
   }, [clothes])
 
-  function roundToNearestFive(number) {
-    return Math.ceil(number / 5) * 5;
-  }
 
   return (
     <section className="ticket-client__wrapper">
@@ -58,13 +51,7 @@ const TicketClient = () => {
       </div>
       <div className='ticket-client__garment'>
       {clothes.map((clothes, i) => {
-        return <div key={`ticket-client-${i}`} className='ticket-client__content'>
-          <p key={`ticket-type-${i}`}>{clothes.type}</p>
-          <p key={`ticket-profit-${i}`}>{parseFloat(clothes.prodUnitCost*profit).toFixed(2)}</p>
-          <p key={`ticket-cost-${i}`}>{parseFloat(clothes.prodUnitCost+(clothes.prodUnitCost*profit)).toFixed(2)}</p>
-          <ClothesInput key={`clothes-clothes-365quote-${i}`} quantity={i} type={'number'} data={`clothes-365quote`} placeholder={'140'}label={'Cotización 365'}fieldName='UQuote'value={roundToNearestFive(parseFloat(clothes.prodUnitCost+(clothes.prodUnitCost*profit)).toFixed(2))} />
-          <p key={`ticket-subtotal-${i}`}>{parseFloat(clothes.prodUnitCost+(clothes.prodUnitCost*profit)).toFixed(2)}</p>
-        </div>
+        return <TicketLineItem key={`line-item-${i}`} index={i} />
       })}
       </div>
       <div className='ticket-client__totals'>

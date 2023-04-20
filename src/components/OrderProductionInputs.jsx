@@ -11,7 +11,6 @@ const OrderProductionInputs = () => {
   let productionInputs = useSelector(state => state.serigraphyOrder.productionInputs)
   
   useEffect(() => {
-    console.log('effect')
     let renderArray = productionInputs.map((input, index) => {
       console.log(index)
       

@@ -10,12 +10,11 @@ const SerigraphyOrderInputs = () => {
   const [clothesOutputs,setClothesCostsArray] = useState([])
 
   useEffect(() => {
-    console.log('effect')
     let renderArray = clothesArray.map((clothes, index) => {
       return  <div key={`clothes-wrapper-${index}`} id="" className="serigraphy-clothes__wrapper">
                 <SerigraphyClothesHeader quantity={index} />
                 <ClothesInput key={`clothes-clothes-type-${index}`} quantity={index} type={'text'} data={`clothes-type`} placeholder={'Playera'}label={'Tipo de prenda'}fieldName='type' />
-                <ClothesInput key={`clothes-clothes-cut-${index}`} quantity={index} type={'text'} data={`clothes-cut`} placeholder={'Negro'}label={',Color'}fieldName='cut' />
+                <ClothesInput key={`clothes-clothes-cut-${index}`} quantity={index} type={'text'} data={`clothes-cut`} placeholder={'Negro'}label={'Color'}fieldName='cut' />
                 <ClothesInput key={`clothes-clothes-color-${index}`} quantity={index} type={'text'} data={`clothes-color`} placeholder={'Manga corta'}label={'Corte'}fieldName='color' />
                 <ClothesInput key={`clothes-clothes-size-${index}`} quantity={index} type={'text'} data={`clothes-size`} placeholder={'M'}label={'Tamaño'}fieldName='size' />
                 <ClothesInput key={`clothes-clothes-material-${index}`} quantity={index} type={'text'} data={`clothes-material`} placeholder={'Algodón'}label={'Material'}fieldName='material' />

@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { changeOrderSummary } from '../actions';
 import ClothesInput from './ClothesInput';
 import '../assets/styles/components/TicketPartner.css';
 
@@ -32,6 +33,8 @@ const TicketPartner = () => {
     setTotals(totalCost)
     setLabourCost(totalLabourCost)
     setPrePosLabourCost(totalPrePosLabourCost)
+    let profit1 = ((saleArray.reduce((a,b) =>  a = a + b , 0 ))-(totalsArray.reduce((a,b) =>  a = a + b , 0 ))) + (labourCostArray.reduce((a,b) =>  a = a + b , 0 )) + (prePosLabourCostArray.reduce((a,b) =>  a = a + b , 0 ))
+    dispatch(changeOrderSummary('profitOne', parseFloat(profit1)))
   }, [clothes])
 
   return (

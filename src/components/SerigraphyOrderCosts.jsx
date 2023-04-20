@@ -10,7 +10,6 @@ const SerigraphyOrderCosts = () => {
   const [clothesOutputs,setClothesCostsArray] = useState([])
 
   useEffect(() => {
-    console.log('effect')
     let renderArray = clothesArray.map((clothes, index) => {
       console.log(index)
       return  <div key={`serigraphy-order-cost-${index}`} id="" className="serigraphy-clothes__cost-wrapper">
